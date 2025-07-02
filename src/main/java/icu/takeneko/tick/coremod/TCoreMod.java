@@ -17,8 +17,7 @@ import icu.takeneko.tick.mixins.TMixins;
 public class TCoreMod extends DummyModContainer implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     public static final String[] DEFAULT_TRANSFORMERS = new String[] {
-        "icu.takeneko.tick.coremod.TDelegatedTransformer"
-    };
+        "icu.takeneko.tick.coremod.TDelegatedTransformer" };
 
     public TCoreMod() {
         super(new ModMetadata());

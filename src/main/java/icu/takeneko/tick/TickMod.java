@@ -1,8 +1,7 @@
 package icu.takeneko.tick;
 
-import icu.takeneko.tick.commands.AllCommands;
-import icu.takeneko.tick.networking.TNetworking;
 import net.minecraft.server.MinecraftServer;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,6 +11,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import icu.takeneko.tick.commands.AllCommands;
+import icu.takeneko.tick.networking.TNetworking;
 
 @Mod(modid = TickMod.MODID, version = Tags.VERSION, name = "Tick", acceptedMinecraftVersions = "[1.7.10]")
 public class TickMod {

@@ -1,16 +1,17 @@
 package icu.takeneko.tick.networking;
 
-import io.netty.buffer.ByteBuf;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import io.netty.buffer.ByteBuf;
+
 public class S2CTickRateStatusPacket implements S2CPacketBase {
+
     private static final Logger logger = LogManager.getLogger();
     private float value;
 
     @SuppressWarnings("unused")
-    public S2CTickRateStatusPacket() {
-    }
+    public S2CTickRateStatusPacket() {}
 
     public S2CTickRateStatusPacket(float value) {
         this.value = value;

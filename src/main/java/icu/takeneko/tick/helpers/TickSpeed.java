@@ -1,14 +1,16 @@
 package icu.takeneko.tick.helpers;
 
-import icu.takeneko.tick.networking.TNetworking;
-import icu.takeneko.tick.TickMod;
 import net.minecraft.command.ICommandManager;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.MathHelper;
 
+import icu.takeneko.tick.TickMod;
+import icu.takeneko.tick.networking.TNetworking;
+
 public class TickSpeed {
+
     public static final int PLAYER_GRACE = 2;
     public static float tickRate = 20.0f;
     public static long mspt = 50L;
@@ -44,7 +46,8 @@ public class TickSpeed {
         TNetworking.broadcastTickRateChanges(tickRate);
     }
 
-    public static String tickrate_advance(EntityPlayer player, long advance, String callback, ICommandSender icommandsender) {
+    public static String tickrate_advance(EntityPlayer player, long advance, String callback,
+        ICommandSender icommandsender) {
         if (0 == advance) {
             if (time_bias <= 0) {
                 return "r No warp in progress";
@@ -56,7 +59,10 @@ public class TickSpeed {
         }
         if (time_bias > 0) {
             if (time_advancerer != null) {
-                return String.format("l %s is already advancing time at the moment. Try later or talk to them", time_advancerer.getGameProfile().getName());
+                return String.format(
+                    "l %s is already advancing time at the moment. Try later or talk to them",
+                    time_advancerer.getGameProfile()
+                        .getName());
             }
             return "l Another player is already advancing time at the moment. Try later or talk to them";
         }
@@ -82,29 +88,41 @@ public class TickSpeed {
         time_warp_scheduled_ticks = 0;
         time_warp_start_time = 0;
         if (tick_warp_callback != null) {
-            ICommandManager icommandmanager = TickMod.getServer().getCommandManager();
+            ICommandManager icommandmanager = TickMod.getServer()
+                .getCommandManager();
             try {
                 int j = icommandmanager.executeCommand(tick_warp_sender, tick_warp_callback);
 
                 if (j < 1) {
                     if (time_advancerer != null) {
-                        Messenger.m(time_advancerer, "r Command Callback failed: ", "rb /" + tick_warp_callback, "/" + tick_warp_callback);
+                        Messenger.m(
+                            time_advancerer,
+                            "r Command Callback failed: ",
+                            "rb /" + tick_warp_callback,
+                            "/" + tick_warp_callback);
                     }
                 }
 
             } catch (Throwable var23) {
                 if (time_advancerer != null) {
-                    Messenger.m(time_advancerer, "r Command Callback failed - unknown error: ", "rb /" + tick_warp_callback, "/" + tick_warp_callback);
+                    Messenger.m(
+                        time_advancerer,
+                        "r Command Callback failed - unknown error: ",
+                        "rb /" + tick_warp_callback,
+                        "/" + tick_warp_callback);
                 }
             }
             tick_warp_callback = null;
             tick_warp_sender = null;
         }
         if (time_advancerer != null) {
-            Messenger.m(time_advancerer, String.format("gi ... Time warp completed with %d tps, or %.2f mspt", tps, mspt));
+            Messenger
+                .m(time_advancerer, String.format("gi ... Time warp completed with %d tps, or %.2f mspt", tps, mspt));
             time_advancerer = null;
         } else {
-            Messenger.print_server_message(TickMod.getServer(), String.format("gi ... Time warp completed with %d tps, or %.2f mspt", tps, mspt));
+            Messenger.print_server_message(
+                TickMod.getServer(),
+                String.format("gi ... Time warp completed with %d tps, or %.2f mspt", tps, mspt));
         }
         time_bias = 0;
 
@@ -112,7 +130,7 @@ public class TickSpeed {
 
     public static boolean continueWarp() {
         if (time_bias > 0) {
-            if (time_bias == time_warp_scheduled_ticks) //first call after previous tick, adjust start time
+            if (time_bias == time_warp_scheduled_ticks) // first call after previous tick, adjust start time
             {
                 time_warp_start_time = System.nanoTime();
             }

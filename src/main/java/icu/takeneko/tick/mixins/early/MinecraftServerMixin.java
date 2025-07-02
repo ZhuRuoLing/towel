@@ -1,11 +1,9 @@
 package icu.takeneko.tick.mixins.early;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
-import icu.takeneko.tick.helpers.TickSpeed;
 import net.minecraft.network.NetworkSystem;
 import net.minecraft.server.MinecraftServer;
-
 import net.minecraft.server.management.ServerConfigurationManager;
+
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -13,6 +11,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+
+import icu.takeneko.tick.helpers.TickSpeed;
 
 @SuppressWarnings("UnusedMixin")
 @Mixin(MinecraftServer.class)
@@ -46,12 +46,8 @@ public abstract class MinecraftServerMixin {
         this.serverIsRunning = true;
     }
 
-    @Redirect(
-        method = "run",
-        at = @At(value = "INVOKE", target = "Ljava/lang/Thread;sleep(J)V")
-    )
-    private static void dismissSleep(long time) {
-    }
+    @Redirect(method = "run", at = @At(value = "INVOKE", target = "Ljava/lang/Thread;sleep(J)V"))
+    private static void dismissSleep(long time) {}
 
     @Unique
     private void bridge$sleepOrNot(boolean fallingBehind, long l) throws InterruptedException {
