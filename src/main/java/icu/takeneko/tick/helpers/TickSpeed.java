@@ -141,6 +141,10 @@ public class TickSpeed {
         }
     }
 
+    public static boolean shouldTick() {
+        return process_entities;
+    }
+
     public static double getMSPT() {
         return MathHelper.average(TickMod.getServer().tickTimeArray) * 1.0E-6D;
     }

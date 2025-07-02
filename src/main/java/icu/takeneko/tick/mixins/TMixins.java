@@ -16,7 +16,9 @@ public enum TMixins implements IMixins {
         .setSide(Side.BOTH)
         .setPhase(Phase.EARLY)
         .setApplyIf(() -> true)
-        .addMixinClasses("MinecraftServerMixin"));
+        .addMixinClasses("MinecraftServerMixin")
+        .addMixinClasses("WorldServerMixin")
+    );
 
     private final List<String> mixinClasses;
     private final Supplier<Boolean> applyIf;

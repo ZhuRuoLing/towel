@@ -2,8 +2,10 @@ package icu.takeneko.tick.mixins.early;
 
 import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import icu.takeneko.tick.helpers.TickSpeed;
+import net.minecraft.network.NetworkSystem;
 import net.minecraft.server.MinecraftServer;
 
+import net.minecraft.server.management.ServerConfigurationManager;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
@@ -20,11 +22,23 @@ public abstract class MinecraftServerMixin {
     protected abstract void tick();
 
     @Shadow
+    protected abstract NetworkSystem func_147137_ag();
+
+    @Shadow
     private boolean serverIsRunning;
 
-    @Inject(method = "tick", at = @At("HEAD"))
+    @Shadow
+    private ServerConfigurationManager serverConfigManager;
+
+    @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
     void onTick(CallbackInfo ci) {
         TickSpeed.tick((MinecraftServer) (Object) this);
+        if (!TickSpeed.shouldTick()) {
+            net.minecraftforge.common.chunkio.ChunkIOExecutor.tick();
+            func_147137_ag().networkTick();
+            this.serverConfigManager.sendPlayerInfoToAllPlayers();
+            ci.cancel();
+        }
     }
 
     @Unique
@@ -40,7 +54,7 @@ public abstract class MinecraftServerMixin {
     }
 
     @Unique
-    private void bridge$sleepOrNot(boolean fallingBehind, long l) throws InterruptedException{
+    private void bridge$sleepOrNot(boolean fallingBehind, long l) throws InterruptedException {
         if (fallingBehind) {
             Thread.sleep(1L);
         } else {
