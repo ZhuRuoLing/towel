@@ -1,22 +1,23 @@
 package icu.takeneko.tick.coremod;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import com.gtnewhorizon.gtnhlib.mixin.IMixins;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
+
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import icu.takeneko.tick.Tags;
 import icu.takeneko.tick.mixins.TMixins;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class TCoreMod extends DummyModContainer implements IFMLLoadingPlugin, IEarlyMixinLoader {
 
     public static final String[] DEFAULT_TRANSFORMERS = new String[] {
-        "com.gtnewhorizon.gtnhlib.core.transformer.EventBusSubTransformer"
+        "icu.takeneko.tick.coremod.TDelegatedTransformer"
     };
 
     public TCoreMod() {
@@ -30,7 +31,7 @@ public class TCoreMod extends DummyModContainer implements IFMLLoadingPlugin, IE
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[]{};
+        return DEFAULT_TRANSFORMERS;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package icu.takeneko.tick.mixins;
 
+import java.util.List;
+import java.util.function.Supplier;
+
 import com.gtnewhorizon.gtnhlib.mixin.IMixins;
 import com.gtnewhorizon.gtnhlib.mixin.ITargetedMod;
 import com.gtnewhorizon.gtnhlib.mixin.MixinBuilder;
@@ -7,16 +10,13 @@ import com.gtnewhorizon.gtnhlib.mixin.Phase;
 import com.gtnewhorizon.gtnhlib.mixin.Side;
 import com.gtnewhorizon.gtnhlib.mixin.TargetedMod;
 
-import java.util.List;
-import java.util.function.Supplier;
-
 public enum TMixins implements IMixins {
+
     MINECRAFT(new MixinBuilder("minecraft").addTargetedMod(TargetedMod.VANILLA)
         .setSide(Side.BOTH)
         .setPhase(Phase.EARLY)
         .setApplyIf(() -> true)
-        .addMixinClasses("MinecraftServerMixin")
-    );
+        .addMixinClasses("MinecraftServerMixin"));
 
     private final List<String> mixinClasses;
     private final Supplier<Boolean> applyIf;
