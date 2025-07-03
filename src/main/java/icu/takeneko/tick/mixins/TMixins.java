@@ -1,67 +1,48 @@
 package icu.takeneko.tick.mixins;
 
 import java.util.List;
-import java.util.function.Supplier;
 
-import com.gtnewhorizon.gtnhlib.mixin.IMixins;
-import com.gtnewhorizon.gtnhlib.mixin.ITargetedMod;
-import com.gtnewhorizon.gtnhlib.mixin.MixinBuilder;
-import com.gtnewhorizon.gtnhlib.mixin.Phase;
-import com.gtnewhorizon.gtnhlib.mixin.Side;
-import com.gtnewhorizon.gtnhlib.mixin.TargetedMod;
+import com.google.common.collect.ImmutableList;
+import icu.takeneko.tick.helpers.MixinPhase;
+import icu.takeneko.tick.helpers.MixinSide;
 
-public enum TMixins implements IMixins {
+public enum TMixins {
 
-    MINECRAFT(new MixinBuilder("minecraft").addTargetedMod(TargetedMod.VANILLA)
-        .setSide(Side.BOTH)
-        .setPhase(Phase.EARLY)
-        .setApplyIf(() -> true)
-        .addMixinClasses("MinecraftServerMixin")
-        .addMixinClasses("WorldServerMixin"));
+    MINECRAFT(
+        ImmutableList.of(
+            "MinecraftServerMixin",
+            "WorldServerMixin"
+        ),
+        ImmutableList.of(),
+        MixinPhase.EARLY,
+        MixinSide.COMMON
+    );
 
     private final List<String> mixinClasses;
-    private final Supplier<Boolean> applyIf;
-    private final Phase phase;
-    private final Side side;
-    private final List<ITargetedMod> targetedMods;
-    private final List<ITargetedMod> excludedMods;
+    private final List<String> targets;
+    private final MixinPhase phase;
+    private final MixinSide side;
 
-    TMixins(MixinBuilder builder) {
-        this.mixinClasses = builder.mixinClasses;
-        this.applyIf = builder.applyIf;
-        this.side = builder.side;
-        this.targetedMods = builder.targetedMods;
-        this.excludedMods = builder.excludedMods;
-        this.phase = builder.phase;
-        if (this.targetedMods.isEmpty()) {
-            throw new RuntimeException("No targeted mods specified for " + this.name());
-        }
-        if (this.applyIf == null) {
-            throw new RuntimeException("No ApplyIf function specified for " + this.name());
-        }
+    TMixins(List<String> mixinClasses, List<String> targets, MixinPhase phase, MixinSide side) {
+        this.mixinClasses = mixinClasses;
+        this.targets = targets;
+        this.phase = phase;
+        this.side = side;
     }
 
     public List<String> getMixinClasses() {
         return mixinClasses;
     }
 
-    public Supplier<Boolean> getApplyIf() {
-        return applyIf;
+    public List<String> getTargets() {
+        return targets;
     }
 
-    public Phase getPhase() {
+    public MixinPhase getPhase() {
         return phase;
     }
 
-    public Side getSide() {
+    public MixinSide getSide() {
         return side;
-    }
-
-    public List<ITargetedMod> getTargetedMods() {
-        return targetedMods;
-    }
-
-    public List<ITargetedMod> getExcludedMods() {
-        return excludedMods;
     }
 }

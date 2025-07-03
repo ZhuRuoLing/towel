@@ -4,14 +4,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.gtnewhorizon.gtnhlib.mixin.IMixins;
 import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
 
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import icu.takeneko.tick.Tags;
-import icu.takeneko.tick.mixins.TMixins;
+import icu.takeneko.tick.helpers.MixinUtils;
 
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class TCoreMod extends DummyModContainer implements IFMLLoadingPlugin, IEarlyMixinLoader {
@@ -60,6 +59,6 @@ public class TCoreMod extends DummyModContainer implements IFMLLoadingPlugin, IE
 
     @Override
     public List<String> getMixins(Set<String> loadedCoreMods) {
-        return IMixins.getEarlyMixins(TMixins.class, loadedCoreMods);
+        return MixinUtils.getEarlyMixins(loadedCoreMods);
     }
 }
