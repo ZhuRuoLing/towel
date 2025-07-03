@@ -45,6 +45,10 @@ public class TDelegatedTransformer implements IClassTransformer {
 
     @Override
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
+        if (basicClass == null) {
+            // average fml shit
+            return null;
+        }
         boolean result = false;
         ClassReader reader = new ClassReader(basicClass);
         ClassNode node = new ClassNode();
