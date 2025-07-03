@@ -3,20 +3,14 @@ package icu.takeneko.tick.mixins;
 import java.util.List;
 
 import com.google.common.collect.ImmutableList;
+
 import icu.takeneko.tick.helpers.MixinPhase;
 import icu.takeneko.tick.helpers.MixinSide;
 
 public enum TMixins {
 
-    MINECRAFT(
-        ImmutableList.of(
-            "MinecraftServerMixin",
-            "WorldServerMixin"
-        ),
-        ImmutableList.of(),
-        MixinPhase.EARLY,
-        MixinSide.COMMON
-    );
+    MINECRAFT(ImmutableList.of("MinecraftServerMixin", "WorldServerMixin"), ImmutableList.of(), MixinPhase.EARLY,
+        MixinSide.COMMON);
 
     private final List<String> mixinClasses;
     private final List<String> targets;

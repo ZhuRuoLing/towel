@@ -1,12 +1,13 @@
 package icu.takeneko.tick.helpers;
 
+import java.util.List;
+import java.util.Set;
+
 import com.google.common.collect.ImmutableList;
+
 import cpw.mods.fml.relauncher.FMLLaunchHandler;
 import cpw.mods.fml.relauncher.Side;
 import icu.takeneko.tick.mixins.TMixins;
-
-import java.util.List;
-import java.util.Set;
 
 public class MixinUtils {
 

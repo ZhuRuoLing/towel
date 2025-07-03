@@ -1,5 +1,6 @@
 package icu.takeneko.tick.helpers;
 
 public enum MixinPhase {
-    EARLY, LATE
+    EARLY,
+    LATE
 }
