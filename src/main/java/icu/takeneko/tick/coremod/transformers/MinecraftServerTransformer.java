@@ -41,18 +41,16 @@ public class MinecraftServerTransformer implements ClassNodeTransformer {
         ListIterator<AbstractInsnNode> it = node.instructions.iterator();
         while (it.hasNext()) {
             AbstractInsnNode insnNode = it.next();
-            if (insnNode instanceof FieldInsnNode && insnNode.getOpcode() == Opcodes.GETFIELD) {
-                FieldInsnNode fi = (FieldInsnNode) insnNode;
+            if (insnNode instanceof FieldInsnNode fi && insnNode.getOpcode() == Opcodes.GETFIELD) {
                 if (fi.owner.equals(MINECRAFT_SERVER)
-                    && (fi.name.equals("serverRunning") || fi.name.equals("field_71317_u"))
+                    && (fi.name.equals("serverRunning") || fi.name.equals("field_71317_u") || fi.name.equals("v"))// why
                     && fi.desc.equals("Z")) {
                     AbstractInsnNode probablyLabel = null;
                     while (it.hasPrevious()) {
                         probablyLabel = it.previous();
                         if (probablyLabel instanceof LabelNode) break;
                     }
-                    if (probablyLabel instanceof LabelNode) {
-                        LabelNode jumpBackNode = (LabelNode) probablyLabel;
+                    if (probablyLabel instanceof LabelNode jumpBackNode) {
                         it.next();
                         while (it.hasNext()) {
                             AbstractInsnNode cont = it.next();

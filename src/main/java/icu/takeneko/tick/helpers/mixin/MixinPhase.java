@@ -1,4 +1,4 @@
-package icu.takeneko.tick.helpers;
+package icu.takeneko.tick.helpers.mixin;
 
 public enum MixinPhase {
     EARLY,

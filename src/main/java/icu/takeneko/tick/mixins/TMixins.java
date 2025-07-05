@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
-import icu.takeneko.tick.helpers.MixinPhase;
-import icu.takeneko.tick.helpers.MixinSide;
+import icu.takeneko.tick.helpers.mixin.MixinPhase;
+import icu.takeneko.tick.helpers.mixin.MixinSide;
 
 public enum TMixins {
 

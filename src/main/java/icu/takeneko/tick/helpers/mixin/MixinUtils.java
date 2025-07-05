@@ -1,4 +1,4 @@
-package icu.takeneko.tick.helpers;
+package icu.takeneko.tick.helpers.mixin;
 
 import java.util.List;
 import java.util.Set;

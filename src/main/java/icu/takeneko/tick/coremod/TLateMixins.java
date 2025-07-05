@@ -6,7 +6,7 @@ import java.util.Set;
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
 
-import icu.takeneko.tick.helpers.MixinUtils;
+import icu.takeneko.tick.helpers.mixin.MixinUtils;
 
 @LateMixin
 public class TLateMixins implements ILateMixinLoader {

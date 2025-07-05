@@ -10,7 +10,7 @@ import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import icu.takeneko.tick.Tags;
-import icu.takeneko.tick.helpers.MixinUtils;
+import icu.takeneko.tick.helpers.mixin.MixinUtils;
 
 @IFMLLoadingPlugin.MCVersion("1.7.10")
 public class TCoreMod extends DummyModContainer implements IFMLLoadingPlugin, IEarlyMixinLoader {
